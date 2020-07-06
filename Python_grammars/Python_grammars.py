@@ -138,3 +138,46 @@ for i in range(10):
 names = ['철수', '영희', '영수']
 for i, name in enumerate(names): # 값을 두개 받을 때 , 를 사용한다.
     print('{}번: {}'.format(i + 1, name))
+
+# 연습문제 enumerate 쓰기!
+days = [31,29,31,30,31,30,31,31,30,31,30,31]
+for m,d in enumerate(days): 
+    m += 1
+    print('{}월의 날짜수는 {}일 입니다.'.format(m,d))
+
+# import의 문법은 해당 모듈을 가져다가 쓰겠다는 것이다.
+import math
+import random
+r = 10
+result = 2*math.pi*r
+print(result)
+print(math.ceil(result))
+print(math.floor(result))
+print(math.log(result))
+
+candidate = ['가위', '바위', '보']
+selected = random.choice(candidate)
+print(selected)
+selected = random.choice(candidate)
+print(selected)
+selected = random.choice(candidate)
+print(selected)
+
+# internet에 있는 내용을 가져올 수 있다.
+def get_web(url):
+    import urllib.request # 인터넷의 내용을 가져오는 기능
+    response = urllib.request.urlopen(url)
+    data = response.read() 
+    decoded = data.decode('utf-8')
+    return decoded
+
+# url = input('웹 페이지주소?')
+# content = get_web(url)
+# print(content)
+
+# module 만들기
+import my_module # 내가 새롭게 만든 module이다.
+print()
+print()
+print(my_module.random_rsp())
+
