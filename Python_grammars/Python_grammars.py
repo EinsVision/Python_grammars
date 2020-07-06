@@ -263,9 +263,9 @@ for key, value in ages.items():
 # list는 저장하는 순서를 지켜준다.
 
 # list와 dictionary를 비교해보자.
-list = [1,2,3,4,5]
+listd = [1,2,3,4,5]
 
-print(2 in list) # list에 2가 있는지 확인해라.
+print(2 in listd) # list에 2가 있는지 확인해라.
 print('Tom' in ages) # dict에서 Tom이 있는지 확인해라.
 
 dict1 = {1:100, 2:200}
@@ -283,7 +283,7 @@ print(type(tuple1))
 tuple2 = 1,2,3       # 이것도 tuple 선언 방법이다.
 print(type(tuple2))
 
-tuple3 = tuple(list) # 이것도 tuple 선언 방법이다.
+tuple3 = tuple(listd) # 이것도 tuple 선언 방법이다.
 print(type(tuple3)) 
 
 # tuple3[0] = 5 (불가능하다.)
@@ -304,7 +304,7 @@ print(c)
 #for i, v in enumerate(list):
 #    print('{}번째 값: {}'.format(i,v))
 
-for a in enumerate(list):
+for a in enumerate(listd):
     print('{}번째 값: {}'.format(*a)) #   *a : tuple을 쪼개라.
 
 # while 반복문 
@@ -314,7 +314,7 @@ for a in enumerate(list):
 # print(selected)
 
 i = 0
-while i < len(list):
+while i < len(listd):
     print('{} 번째'.format(i))
     i += 1
 print()
@@ -325,3 +325,185 @@ for val in list_a:
     if val % 3 == 0:
         print(val)
         break # 반복문을 종료한다.
+
+# try, except
+
+list3 = []
+try:
+    list3[0] # IndexError: list index out of range
+except IndexError: # error가 발생할 경우 따로 처리를 해줄 수 있다. 프로그램이 멈추는 경우를 막을 수 있다.
+    print('범위를 벗어났습니다.')
+
+try:
+    import my_module
+except ImportError:
+    print("모듈이 없습니다.")
+
+try:
+    a = 3/0
+except ZeroDivisionError:
+    print("0으로 나눌 수 없습니다.")
+
+# error의 이름을 모를 경우 
+try:
+    list4 = []
+    print(list4[0])
+
+    text = 'abc'
+    number = int(text)
+except Exception as ex: # error의 이름을 모를 경우 
+    print("error가 발생했습니다.", ex) # error의 종류를 알 수 있다.
+
+# error raise 에러 발생
+def rsp1(mine, yours):
+    allowed = ['가위', '바위', '보']
+    if mine not in allowed:
+        raise ValueError            # error를 발생시키는 문법
+    if yours not in allowed:
+        raise ValueError
+
+try:
+    rsp1('가위','바')
+except ValueError:
+    print('잘못된 값입니다.')
+
+school = {'1반': [174,167,526,546],
+          '2반': [223,442,444,222]
+          }
+
+try:
+    for class_number, students in school.items():
+        for student in students:
+            if student > 190:
+                print('190을 넘는 학생이 있습니다.')
+                raise StopIteration # 실행 흐름을 끊는다.
+except StopIteration:
+    print('190 이상 존재!')
+
+# 논리연산 더 알아보기
+def return_false():
+    print('함수 return false')
+    return False
+
+def return_true():
+    print('함수 return true')
+    return True
+
+a = return_false()
+b = return_true()
+
+if a and b:
+    print(True)
+else:
+    print(False)
+
+
+# bool 평가! 
+print(bool(0))
+print(bool(-12))
+print(bool(None))
+print(bool('hi'))
+
+# list의 다양한 기능
+list5 = [113,246,33,555,34]
+print(list5.index(246))
+try:
+    print(list5.index(247))
+except ValueError:
+    print('index is none at list5')
+# list를 덧붙일 수 있다.
+list6 = [1,2,3] + [4,5,6]
+print(list6)
+
+list6.extend([9,10,11])
+print(list6)
+
+list6.insert(2,999)
+print(list6)
+
+list6.insert(-1,9999)
+print(list6)
+
+list6.sort() # 오름차순으로 정리한다.
+print(list6)
+
+list6.reverse() # 내림차순으로 정리한다.
+print(list6)
+
+
+def safe_index(my_list, value):
+    # 함수를 완성하세요
+    if value in my_list:
+        return my_list.index(value)
+
+    else:
+        return None
+
+# list와 문자열
+print(safe_index([1,2,3,4,5], 5))
+print(safe_index([1,2,3], 5))
+
+my_list = [1,2,3,4,5,6]
+print(my_list[0])
+
+str = "hello world"
+print(str[0])
+
+print('h' in str)
+print('z' in str)
+
+print(str.index('r'))
+
+words_list = str.split() # 공백으로 string을 잘라서 list를 만들어 준다.
+print(words_list)
+
+time_list = "10:34:55"
+time_str = time_list.split(':') # : 를 기준으로 string을 잘라서 list를 만들어 준다.
+print(time_str)
+
+":".join(time_str)
+print(time_str)
+
+" ".join(words_list)
+print(words_list)
+
+# Slice ( list의 일부분을 가져오는 것을 말한다. )
+list7 = [1,2,3,4,5]
+print(list7[1])
+print(list7[1:4]) # [2, 3, 4] 출력!
+
+text = "hello world"
+print(text[1:len(text)]) # 특정 위치부터 끝까지 가져오는 방법이다.
+print(text[2:])
+
+# Slice Step
+a = list(range(20))
+print(a)
+
+print(a[5:15])
+print(a[5:15:2]) # 2가 step이다.
+print(a[5:15:3]) # 3이 step이다.
+print(a[14:4:-1]) # 3이 step이다.
+print(a[::3])
+
+# Slie로 List 수정하기
+numbers = list(range(10))
+print(numbers)
+del numbers[0]
+print(numbers)
+del numbers[:5]
+print(numbers)
+
+numbers[1:3] = [77,88,99] 
+print(numbers) # [6, 77, 88, 9]
+
+# datetime 날짜와 시간 다루기
+import datetime
+print(datetime.datetime.now())
+
+start_time = datetime.datetime.now()
+print(type(start_time))        # <class 'datetime.datetime'>
+
+start_time = start_time.replace(year=2017, month=2, day=1)
+print(start_time)
+
