@@ -181,3 +181,147 @@ print()
 print()
 print(my_module.random_rsp())
 
+# 오늘 날짜 받아오기
+import datetime
+print(datetime.datetime.today()) # 오늘 날짜를 받아오는 함수이다.
+now = datetime.datetime.now()
+print(now.year, now.month, now.day)
+
+# 딕셔너리 만들기 dictionary
+wintable = {
+    '가위':'보', #   이름표:값
+    '바위':'가위',
+    '보':'바위',
+    3:'Tell me'
+    }
+
+print(wintable[3])
+
+def rsp(mine, yours):
+    if mine == yours:
+        return 'draw'
+    elif wintable[mine] == yours:
+        return 'win'
+    else:
+        return 'lose'
+
+messages = {
+    'win':'이겼다',
+    'draw':'비겼다',
+    'lose':'졌어'
+    }
+
+result = rsp('가위','보')
+print(messages[result])
+
+result = rsp('바위','바위')
+print(messages[result])
+
+result = rsp('가위','바위')
+print(messages[result])
+
+# dictionary 수정하기
+dict1 ={
+    'one':1,
+    'two':2,
+    'three':3
+    }
+
+dict1['one'] = 11 # dictionary 수정하기
+print(dict1)
+
+dict1['four'] = 4 # dictionary 추가하기
+print(dict1)
+
+del dict1['one']
+print(dict1)
+
+print(dict1.pop('two'))
+print(dict1)
+
+# dictionary와 반복문
+seasons = ['spring','summer','fall','winter']
+for season in seasons:
+    print(season)
+
+ages ={
+    'Tom':12, # key 'Tom' value '12'   
+    'Joel':25,
+    'Billy':35
+    }
+
+for key in ages.keys():
+    print(key)
+
+for age in ages.values():
+    print(age)
+
+for key, value in ages.items():
+    print('이름은 {} 이고, 나이는 {}'.format(key, value))
+
+# 여기서 dictionary는 순서를 보장하지 않는다. 한번씩 모두 나오는 것은 보장되어있다.
+# list는 저장하는 순서를 지켜준다.
+
+# list와 dictionary를 비교해보자.
+list = [1,2,3,4,5]
+
+print(2 in list) # list에 2가 있는지 확인해라.
+print('Tom' in ages) # dict에서 Tom이 있는지 확인해라.
+
+dict1 = {1:100, 2:200}
+dict2 = {1:1000, 3:300}
+
+#dict1.update(dict2)
+#print(dict1)
+
+dict2.update(dict1)
+print(dict2)
+
+# 튜플 만들기 ( ) 한번 정해지면 값을 바꿀 수 없다.
+tuple1 = (1,2,3) 
+print(type(tuple1))
+tuple2 = 1,2,3       # 이것도 tuple 선언 방법이다.
+print(type(tuple2))
+
+tuple3 = tuple(list) # 이것도 tuple 선언 방법이다.
+print(type(tuple3)) 
+
+# tuple3[0] = 5 (불가능하다.)
+
+# Tuple 변수의 Packing & UnPacking
+c = (3,4)
+d,e = c
+print(d,e) # Tuple UnPacking
+
+f = d,e
+print(f)   # Tuple Packing
+
+d,e = e,d  # Tuple 값 바꾸기
+c = d,e
+print(c)
+
+# Tuple을 이용한 함수의 리턴값
+#for i, v in enumerate(list):
+#    print('{}번째 값: {}'.format(i,v))
+
+for a in enumerate(list):
+    print('{}번째 값: {}'.format(*a)) #   *a : tuple을 쪼개라.
+
+# while 반복문 
+# selected = None
+# while selected not in ['가위', '바위', '보']:
+#     selected = input('가위, 바위, 보 중에 선택하세요.')
+# print(selected)
+
+i = 0
+while i < len(list):
+    print('{} 번째'.format(i))
+    i += 1
+print()
+
+# break, continue
+list_a = [1,2,3,4,5,6,7,8,9,0]
+for val in list_a:
+    if val % 3 == 0:
+        print(val)
+        break # 반복문을 종료한다.
