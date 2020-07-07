@@ -497,6 +497,211 @@ print(numbers)
 numbers[1:3] = [77,88,99] 
 print(numbers) # [6, 77, 88, 9]
 
+# 자료형 다루기
+s = "Hello World"
+print(type(s)) # <class 'str'>  문자열
+
+f = 3.14
+print(type(f)) # <class 'float'> float 
+
+i = 43
+print(type(i)) # <class 'int'>
+
+print(isinstance(42, int)) 
+print(isinstance(42, float)) 
+print()
+
+# 연습문제
+my_list = [1, 2, 3]
+my_dict = {"풀": 800, "색연필": 3000}
+my_tuple = (1, 2, 3)
+number = 10
+real_number = 3.141592
+
+print(type(my_list))
+print(type(my_dict))
+print(type(my_tuple))
+print(type(number))
+print(type(real_number))
+
+# class와 인스턴스
+numbers = list(range(10))
+print(numbers)
+print(type(numbers))
+
+char = list('hello')
+print(char)
+print(type(char))
+
+# 인스턴스: 만들어져서 사용가능한 list를 말한다.
+# class: type을 말한다.
+# 연습문제
+list1 = [1, 2, 3]
+list2 = [1, 2, 3]
+
+if list1 is list1:
+    print("당연히 list1과 list1은 같은 인스턴스입니다.")
+
+if list1 == list2:
+    print("list1과 list2의 값은 같습니다.")
+    if list1 is list2:
+        print("그리고 list1과 list2는 같은 인스턴스입니다.")
+    else:
+        print("하지만 list1과 list2는 다른 인스턴스입니다.")
+
+# class 만들기
+# class 선언
+class Human():
+    '''사람'''
+
+# 인스턴스 생성
+person1 = Human()
+person2 = Human()
+
+print(person1)
+print(type(person1))
+
+person1.langague = '한국어'
+person2.langague = '영어'
+
+person1.name = '한국사람'
+person2.name = '인도사람'
+print(person1.langague)
+print(person2.langague)
+
+def speak(person):
+    print('{} 이 {}로 말합니다.'.format(person.name, person.langague))
+
+Human.speak = speak
+
+print(person1.speak())
+print(person2.speak())
+
+# class modeling
+class BeingHuman():
+    ''' 사람이 되어라'''
+    # 특수한 메소드
+    def __init__(self):
+        '''초기화 함수'''
+        print('__init__ 실행')
+
+    def __str__(self):
+        '''문자열화 함수'''
+        print('__str__ 실행')
+        return '{} (몸무게) {} (kg) '.format(self.name, self.weight)
+        
+    def create_human(name, height, weight):
+        person = BeingHuman()
+        person.name = name
+        person.height = height
+        person.weight = weight
+        return person
+
+    def eat(self):
+        self.weight += 0.1
+        print('{}가 먹어서 {}가 되었습니다.'.format(self.name, self.weight))
+
+    def walk(self):
+        self.weight -= 0.1
+        print('{}가 걸어서 {}가 되었습니다.'.format(self.name, self.weight))
+
+    def speak(self, message):
+        print(message)
+
+print()
+person = BeingHuman.create_human('egoing', 172, 70)
+print(person)
+
+person.eat()
+person.walk()
+person.eat()
+person.eat()
+person.eat()
+person.eat()
+person.eat()
+person.eat()
+person.eat()
+person.eat()
+person.speak('I wanna speak English')
+
+# 매소드 이해하기
+# 메소드는 함수와 비슷하다.
+# 클래스에 묶여서 클래스의 인스턴스와 관계되는 일을 하는 함수
+
+
+class Car():
+    '''자동차'''
+
+    def run(self):
+        print("{}가 달립니다.".format(self.name))
+
+taxi = Car()
+taxi.name = "택시"
+taxi.run()
+
+# 상속과 다형성
+class animal():          # 부모 class 
+    def walk(self):
+        print('걷는다.')
+    def eat(self):
+        print('먹는다.')
+    def greet(self):
+        print(' 인사한다.')
+
+class Human_heri(animal): # 상속의 개념이다. (자식 class)
+    #def walk(self):
+    #    print('걷는다.')
+    #def eat(self):
+    #    print('먹는다.')
+    def wave(self):
+        print('손을 흔든다.')
+    def greet(self): # 단순 오버라이드
+        self.wave()
+        super().greet()
+
+class dog(animal): # 상속의 개념이다. (자식 class)
+    #def walk(self):
+    #    print('걷는다.')
+    #def eat(self):
+    #    print('먹는다.')
+    def wag(self):
+        print('꼬리를 흔든다.')
+    def greet(self): # 단순 오버라이드
+        self.wag()
+        super().greet()
+
+print()
+person5 = Human_heri()
+person5.walk()
+person5.eat()
+person5.wave()
+person5.greet()
+print()
+
+
+Dog = dog()
+Dog.walk()
+Dog.eat()
+Dog.wag()
+Dog.greet()
+
+# List Comprehension
+areas = []
+for i in range(1,11):
+    areas = areas + [i*i] 
+
+print(areas)
+
+area = [i*i for i in range(1,11)]
+print(area)
+
+# 특정 조전을 만족하는 list를 넣는다.
+area2 = [i*i for i in range(1,11) if i % 2 == 0]
+print(area2)
+
+#area3 = [ ( x, y ) for x in range(15) for y in range(15) ] # [ 계산식 for문 for문 ]
+#print(area3)
+
 # datetime 날짜와 시간 다루기
 import datetime
 print(datetime.datetime.now())
@@ -507,3 +712,33 @@ print(type(start_time))        # <class 'datetime.datetime'>
 start_time = start_time.replace(year=2017, month=2, day=1)
 print(start_time)
 
+# 연습문제
+import datetime
+
+def days_until_christmas():
+    christmas_2030 = datetime.datetime(2030, 12, 25)
+    days = (christmas_2030 - datetime.datetime.now()).days
+    return days
+
+print("{}일".format(days_until_christmas()))
+
+# timedelta
+hundred = datetime.timedelta(days=100)              # timedelta       
+hundred_before = datetime.timedelta(days=-100)      # timedelta
+print(hundred)
+
+# 현재 + 100일 
+print(datetime.datetime.now() + hundred)
+print(type(datetime.datetime.now() + hundred))
+
+# 현재 - 100일 
+print(datetime.datetime.now() + hundred_before)
+print(type(datetime.datetime.now() + hundred_before))
+
+# 하루만 더 해보자.
+tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
+print(tomorrow)
+
+hundred_after = datetime.datetime.now().replace(hour = 9, minute = 0, second = 0) + datetime.timedelta(days=+100)
+
+print("{}/{}/{}  {}:{}:{}".format(hundred_after.year,hundred_after.month, hundred_after.day, hundred_after.hour, hundred_after.minute, hundred_after.second))
