@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>62590511-befd-49e2-8b56-637fde2990b6</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>m_NumPy.py</StartupFile>
+    <StartupFile>m_Pandas.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="m_NumPy.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="m_Pandas.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Python_grammars.py" />
