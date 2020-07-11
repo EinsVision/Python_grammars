@@ -193,4 +193,130 @@ India = df_index_with_country['Population']['India']
 print(India)
 print()
 print(India/Belgium)
+print()
 
+# 9. Pandas Importing/Exporting
+# Importing 함수의 경우 pd.read 형태를 가지며
+# Exporting 함수의 경우 df.to 형태를 가집니다.
+print(dataf1)
+print()
+
+# exproting 방식 (json 형식)
+json_data = dataf1.to_json()
+print(json_data) 
+print()
+
+# print(dataf1.to_html())
+
+# importing 방식
+print(pd.read_json(json_data))
+print()
+
+# 10. CSV 
+# 파일다운로드 받기 ( file importing )
+df_iris_sample = pd.read_csv('iris_sample.csv') 
+print(df_iris_sample)
+print()
+
+# csv뿐만 아니라 tsv, txt도 read_csv()파일을 
+# 통해 읽어올 수 있습니다.
+
+# file exporting
+print(df_iris_sample.head()) # 첫 5행만 가져와라.
+print()
+print(df_iris_sample.tail()) # 마지막 5행만 가져와라.
+print()
+
+df_iris_sample_2 = df_iris_sample.head()
+df_iris_sample_2.to_csv('iris_sample_2.csv',index = False) # file exporting
+# Unnamed: 0 라는 열이 들어가 있습니다. 
+# 이는 to_csv()시 index도 함께 파일에 저장되기에 생기는 문제입니다.
+print(pd.read_csv('iris_sample_2.csv')) 
+print()
+
+# 이번에는 excel 파일을 importing하거나 exporting 해본다.
+# 기본적으로 read_excel()은 첫번째 시트를 가져옵니다. 
+df_rank_sample1 = pd.read_excel('성적표.xlsx', sheet_name=0)
+
+# 두 번째 시트를 가져오려면 sheet_name 파라메터에 
+df_rank_sample2 = pd.read_excel('성적표.xlsx', sheet_name=1)
+
+print(df_rank_sample1)
+print()
+
+print(df_rank_sample2)
+print()
+
+df_sheet2 = pd.read_excel('성적표.xlsx', sheet_name='Sheet2')
+df_sheet2.to_excel('to_excel.xlsx', sheet_name='kingdom', index=False)
+print(pd.read_excel('to_excel.xlsx'))
+print()
+
+# 11. 데이터베이스 연결 mysql에 연결
+#import sqlalchemy
+
+#user = "anonymous"
+#host = "ensembldb.ensembl.org"
+#port = 3337
+#database = "ailuropoda_melanoleuca_core_79_1"
+
+#url = f"mysql+mysqlconnector://{user}@{host}:{port}/{database}"
+# url = f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}"
+
+# pip install -U chatterbot
+# pip install sqlalchemy 
+#connection = sqlalchemy.create_engine(url)
+#connect_sql = pd.read_sql("select * from analysis limit 3", connection)
+#print(connect_sql)
+#print()
+
+# 12. 데이터를 다루는 기술에 대해 배운다.
+print(dataf1)
+print()
+
+print(dataf1['Country'])
+print()
+
+print(dataf1[['Country', 'Population']])
+print()
+
+# 이제 슬라이싱에 대해 다룬다
+print(dataf1[0:2]) # 0 행, 1 행 만 가져온다.
+print()
+
+print(dataf2)
+print()
+
+# label 슬라이싱. 'cc' 포함
+print(dataf2['aa':'cc'])
+print()
+
+# 13. loc (Label based indexing)
+#     iloc (Positional indexing)
+
+# 위치를 통한 인덱싱
+print(dataf1.iloc[0,0])
+print()
+# 위치를 통한 인덱싱
+print(dataf1.iat[0,0])
+print()
+
+# 라벨을 통한 인덱싱
+print(dataf1.loc[0,'Country'])
+print()
+# 라벨을 통한 인덱싱
+print(dataf1.at[0,'Country'])
+print()
+
+# 14. 슬라이싱 (연속된 값을 가져오는 것이다.)
+print(dataf1.iloc[0:1,0:2]) # 위치를 통한 슬라이싱 (끝은 미포함)
+print()
+
+print(dataf1.loc[0:1, 'Country':'Capital']) # 라벨을 통한 슬라이싱 (끝 포함))
+print()
+
+# 15. 블리언 인덱싱 (필터링)
+print(dataf1.loc[:,'Population'] > 200000000)
+print()
+print(dataf1[dataf1['Population'] > 200000000])
+print()
