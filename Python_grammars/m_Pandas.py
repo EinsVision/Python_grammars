@@ -320,3 +320,139 @@ print(dataf1.loc[:,'Population'] > 200000000)
 print()
 print(dataf1[dataf1['Population'] > 200000000])
 print()
+
+# 16. 실습
+dataf3 = {'country': ['Belgium', 'France', 'Germany', 'Netherlands', 'United Kingdom'],
+        'population': [11.3, 64.3, 81.3, 16.9, 64.9],
+        'area': [30510, 671308, 357050, 41526, 244820],
+        'capital': ['Brussels', 'Paris', 'Berlin', 'Amsterdam', 'London']}
+countries = pd.DataFrame(dataf3)
+countries = countries.set_index('country') # 인덱스 지정
+print(countries)
+print()
+
+# EXERCISE: 인구밀도를 의미하는 `density` 칼럼을 추가하세요.
+# (주의: 현재 'population' 칼럼은 10만 단위로 표기되어 있습니다)
+countries['density'] = countries['population'] * 1000000 / countries['area']
+print(countries)
+print()
+
+# EXERCISE: 인구밀도가 300을 초과하는
+# 국가(country)의 수도(capital)과 인구(population)을 선택해주세요.
+print(countries.loc[countries['density'] > 300, ['capital', 'population']])
+print()
+
+# EXERCISE: 'density_ratio' 칼럼을 추가해주세요. 
+# (density_ratio = 인구밀도/평균 인구밀도)
+countries['density_ratio'] = countries['density'] / countries['density'].mean()
+print(countries)
+print()
+
+# EXERCISE: 영국(United Kingdom)의 수도(capital)를 
+# 'Cambridge'로 변경해주세요.
+
+countries.loc['United Kingdom','capital'] = 'Cambridge'
+print(countries)
+print()
+
+# EXERCISE: 인구 밀도가 100 초과, 300 미만인 국가들을 표시해주세요.
+print(countries[(countries['density'] > 100) & (countries['density'] < 300)]) 
+print()
+
+# 17. string 실습
+print(countries['capital'].str.len())
+print()
+
+# EXERCISE: 수도가 7글자 이상인 국가들을 표시해주세요. 
+# (힌트: string의 len( )를 사용하세요.)
+print(countries[countries['capital'].str.len() >= 7])
+print()
+
+# EXERCISE: 수도에 'am' 이 포함되는 국가들을 표시해주세요.
+# (힌트: string의 contains( )를 사용하세요.)
+print(countries[countries['capital'].str.contains('am')])
+print()
+
+# 18. data 삭제
+print(countries.drop('Belgium', axis=0)) # row 행 삭제
+print()
+
+print(countries.drop('area', axis=1)) # row 행 삭제
+print()
+
+# 19. Pandas 함수
+# dataf1.describe() # 숫자 열에만 적용. 
+# 숫자열의 통계값과 최대 최소 값 등을 보여줌
+print(dataf1)
+print()
+
+print(dataf1.describe())
+print()
+
+# dataf1.head(2) # 초반 n행을 보여줌. default는 5
+print(dataf1.head(2))
+print()
+
+# 오름차순 정렬
+print(dataf1.sort_values('Population', ascending=True)) 
+print()
+
+# 내림차순 정렬
+print(dataf1.sort_values('Population', ascending=False))
+print()
+
+# null값이 있는지 확인
+print(dataf1.isnull())
+print()
+
+# column(열)별로 null값이 있는지 확인
+print(dataf1.isnull().any()) # axis=0이 생략된 형태
+# df.isnull().any(axis=0)
+print()
+
+# row(행)별로 null값이 있는지 확인
+print(dataf1.isnull().any(axis=1))
+print()
+
+print(dataf1.count())
+print()
+
+print(dataf1.sum())
+print()
+
+print(dataf1.min())
+print()
+
+print(dataf1.max())
+print()
+
+print(dataf1.mean()) # 숫자 열에만 적용
+print()
+
+print(dataf1.median()) # 숫자 열에만 적용
+print()
+
+# 20. apply 함수
+print(dataf1.loc[:, 'Population':'Population'])
+print()
+
+print(dataf1.loc[:, 'Population':'Population'].apply(lambda x : x+1))
+print()
+
+print(dataf1.loc[:, 'Country':'Capital'])
+print()
+
+print(dataf1.loc[:, 'Country':'Capital'].apply(lambda x: x['Country'] + "'s capital is " + x['Capital'], axis=1))
+print()
+
+# 21. groupby 함수
+# dataframe을 key값에 따라 나눈 뒤 
+# 각각에 특정한 함수를 적용한 뒤 
+# 다시 합치고 싶을때 사용합니다.
+
+df = pd.DataFrame({'key':['A','B','C','A','B','C','A','B','C'],
+                   'data': [0, 5, 10, 5, 10, 15, 10, 15, 20]})
+print(df.groupby('key').sum())
+print()
+
+
